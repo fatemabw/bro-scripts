@@ -1,5 +1,5 @@
 # Script to determine iOS version.
-$ Fatemabw, 2016
+# Fatemabw, 2016
 
 @load base/protocols/http
 @load base/frameworks/software
