@@ -1,3 +1,9 @@
+
+# Mcafee GTI File Reputation accesses an online master database to determine whether a file is suspicious. 
+# GTI File Reputation queries can be recognized because they are on sub domains of avqs.mcafee.com or avts.mcafee.com.
+# By determining the src_ip making the queries to GTI DB for suspicious file, one can find out if they are running Mcafee VS.
+# Following script determines the Mcafee AV by looking at the DNS queries for those sub-domains.
+
 @load base/frameworks/software
 @load base/protocols/dns
 
