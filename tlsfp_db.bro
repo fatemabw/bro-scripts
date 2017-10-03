@@ -1,5 +1,7 @@
 ################################
 # DATASET for the TLS Client FP
+# Dataset taken from the LeeBrotherston DB:
+# https://github.com/LeeBrotherston/tls-fingerprinting/blob/master/fingerprints/fingerprints.json
 # Courtesy By: Seth Hall
 ################################
 
