@@ -1,5 +1,0 @@
-[package]
-description = Find different type of OSes and AV software in your network traffic.
-tags = OS detection, Anti-Virus
-version = 1.0.0
-script_dir = scripts
