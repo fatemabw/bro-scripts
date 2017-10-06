@@ -106,7 +106,11 @@ module MACOS;
                                                      break;
                                                 case "13":
                                                      minorVer=13;
-                                                     addtionalInfo= "Version later than 12";
+                                                     addtionalInfo= "High Sierra";
+                                                     break;
+                                                case "14":
+                                                     minorVer=14;
+                                                     addtionalInfo= "Version later than 13";
                                                      break;
                                                 default:
                                                      minorVer=0;
