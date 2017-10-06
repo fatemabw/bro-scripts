@@ -4,7 +4,7 @@
 # Courtesy by: Seth Hall
 ###############################
 
-@load site/tlsfp_db
+@load ./tlsfp_db
 
 module TLSFP;
 
