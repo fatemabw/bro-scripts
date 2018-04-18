@@ -20,6 +20,9 @@ module AV;
         ## Identifier for AV software
             MCAFEE,
             MALWAREBYTES,
+            AVAST,
+            SOPHOS,
+            QIHU,
         };
 
         type Software::name_and_version: record {
@@ -33,24 +36,46 @@ event DNS::log_dns (rec: DNS::Info) &priority=5
     {
         local result: Software::name_and_version;
         
-        if ( /avts.mcafee.com/ in rec$query )
+        if ( rec?$query && /avts.mcafee.com/ in rec$query )
         {   
             result$name = "Mcafee GTI";
             result$version$addl = "Probably VSCore 14.4.0.354.17 or later";
             Software::found(rec$id, [$version=result$version, $name=result$name, $host=rec$id$orig_h, $software_type=MCAFEE,$unparsed_version=rec$query]);   
         }
         
-        if ( /avqs.mcafee.com/ in rec$query )
+        if ( rec?$query && /avqs.mcafee.com/ in rec$query )
         {   
             result$name = "Mcafee GTI";
             result$version$addl = "Probably GTI Proxy or Othe Mcafee Entp. product";
             Software::found(rec$id, [$version=result$version, $name=result$name, $host=rec$id$orig_h, $software_type=MCAFEE,$unparsed_version=rec$query]);   
         }
         
-        if ( /keystone.mwbsys.com/ in rec$query )
+        if ( rec?$query && /keystone.mwbsys.com/ in rec$query )
         {   
             result$name = "MalwareBytes";
-            Software::found(rec$id, [$version=result$version, $name=result$name, $host=rec$id$orig_h, $software_type=MALWAREBYTES,$unparsed_version=rec$query]);   
+            Software::found(rec$id, [$name=result$name, $host=rec$id$orig_h, $software_type=MALWAREBYTES,$unparsed_version=rec$query]);   
         }
-         
+        
+        if ( rec?$query && /sophosxl.net/ in rec$query )
+        {   
+            result$name = "Sophos";
+            Software::found(rec$id, [$name=result$name, $host=rec$id$orig_h, $software_type=SOPHOS,$unparsed_version=rec$query]);   
+        }
+        
+        if ( rec?$query && /ff.avast.com/ in rec$query )
+        {   
+            result$name = "Avast";
+            Software::found(rec$id, [$name=result$name, $host=rec$id$orig_h, $software_type=AVAST,$unparsed_version=rec$query]);   
+        }
+        
     }
+event HTTP::log_http(rec: HTTP::Info) &priority=10
+{
+  if(rec?$method && rec$method == "POST" && /conf.f.360.cn/ in rec$host)
+  {   local result: Software::name_and_version;
+      result$name = "Qihu";
+      Software::found(rec$id, [$name=result$name, $host=rec$id$orig_h, $software_type=QIHU]);
+      
+  }
+
+}
